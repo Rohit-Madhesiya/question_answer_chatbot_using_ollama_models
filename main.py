@@ -15,14 +15,14 @@ os.environ['LANGCHAIN_PROJECT']="Q&A Chatbot with Ollama Models"
 # prompt template
 prompt=ChatPromptTemplate.from_messages([
   ("system","You are a helpful assistant, respond to the user query"),
-  ("user","{question}")
+  ("user","{input}")
 ])
 
 def generate_response(question,llm,temp,max_token):
   model=ChatOllama(model=llm,temperature=temp,num_predict=max_token)
   parser=StrOutputParser()
   chain=prompt|model|parser
-  answer=chain.invoke({"question":question})
+  answer=chain.invoke({"input":question})
   return answer
 
 # streamlit frontend
